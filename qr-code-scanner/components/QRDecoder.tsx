@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react"
 import CryptoJS from "crypto-js"
 
+const SECRET_KEY = process.env.QR_SECRET_KEY || "default-secret-key"
+
 export default function QRDecoder() {
   const [encryptedPayload, setEncryptedPayload] = useState<string | null>(null)
   const [decryptedData, setDecryptedData] = useState<string | null>(null)
@@ -22,7 +24,7 @@ export default function QRDecoder() {
 
   const decryptPayload = (payload: string) => {
     try {
-      const decrypted = CryptoJS.AES.decrypt(payload, "intuition@2025").toString(CryptoJS.enc.Utf8)
+      const decrypted = CryptoJS.AES.decrypt(payload, SECRET_KEY).toString(CryptoJS.enc.Utf8)
       if (decrypted) {
         setDecryptedData(decrypted)
       } else {
