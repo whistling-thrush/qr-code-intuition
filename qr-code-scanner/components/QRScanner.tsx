@@ -4,6 +4,8 @@ import { useState, useEffect, useRef } from "react"
 import { Html5QrcodeScanner } from "html5-qrcode"
 import CryptoJS from "crypto-js"
 
+const SECRET_KEY = process.env.QR_SECRET_KEY || "default_secret_key"
+
 export default function QRScanner() {
   const [data, setData] = useState<string | null>(null)
   const [decryptedData, setDecryptedData] = useState<string | null>(null)
@@ -26,7 +28,7 @@ export default function QRScanner() {
   const onScanSuccess = (decodedText: string) => {
     setData(decodedText)
     try {
-      const decrypted = CryptoJS.AES.decrypt(decodedText, "secret_key").toString(CryptoJS.enc.Utf8)
+      const decrypted = CryptoJS.AES.decrypt(decodedText, SECRET_KEY).toString(CryptoJS.enc.Utf8)
       setDecryptedData(decrypted)
     } catch (error) {
       console.error("Decryption failed:", error)
