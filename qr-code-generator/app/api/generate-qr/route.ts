@@ -3,6 +3,7 @@ import QRCode from "qrcode"
 import CryptoJS from "crypto-js"
 
 const SECRET_KEY = process.env.QR_SECRET_KEY || "default-secret-key"
+const DOMAIN = ""
 
 export async function POST(req: Request) {
   try {
@@ -17,7 +18,10 @@ export async function POST(req: Request) {
 
     const encryptedPayload = CryptoJS.AES.encrypt(JSON.stringify(payload), SECRET_KEY).toString()
 
-    const qrCode = await QRCode.toDataURL(encryptedPayload)
+    // Create the URL with the encryptedPayload as a query parameter
+    const url = `https://${DOMAIN}/payload?encryptedPayload=${encodeURIComponent(encryptedPayload)}`
+
+    const qrCode = await QRCode.toDataURL(url)
 
     return NextResponse.json({ qrCode: qrCode.split(",")[1], encryptedPayload })
   } catch (error) {
