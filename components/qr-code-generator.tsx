@@ -20,8 +20,8 @@ export default function QRCodeGenerator() {
       })
 
       if (response.ok) {
-        const { qrCode } = await response.json()
-        router.push(`/display?qr=${encodeURIComponent(qrCode)}`)
+        const { qrCode, encryptedPayload } = await response.json()
+        router.push(`/display?qr=${encodeURIComponent(qrCode)}&payload=${encodeURIComponent(encryptedPayload)}`)
       } else {
         console.error("Failed to generate QR code")
       }

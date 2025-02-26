@@ -19,7 +19,7 @@ export async function POST(req: Request) {
 
     const qrCode = await QRCode.toDataURL(encryptedPayload)
 
-    return NextResponse.json({ qrCode: qrCode.split(",")[1] })
+    return NextResponse.json({ qrCode: qrCode.split(",")[1], encryptedPayload })
   } catch (error) {
     console.error("Error generating QR code:", error)
     return NextResponse.json({ error: "Failed to generate QR code" }, { status: 500 })

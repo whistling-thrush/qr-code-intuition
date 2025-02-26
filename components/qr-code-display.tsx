@@ -11,10 +11,11 @@ export default function QRCodeDisplay() {
   const searchParams = useSearchParams()
 
   useEffect(() => {
+    const payload = searchParams.get("payload")
     const qrCode = searchParams.get("qr")
-    if (qrCode) {
+    if (qrCode && payload) {
       setQrCodeData(qrCode)
-      validateQRCode(qrCode)
+      validateQRCode(payload)
     }
   }, [searchParams])
 
