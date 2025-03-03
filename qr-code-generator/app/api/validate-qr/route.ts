@@ -9,6 +9,7 @@ const TIME_SLOTS = {
     { start: 18 * 60, end: 20 * 60 }, // Dinner: 6:00 PM - 8:00 PM
     { start: 8 * 60, end: 10 * 60 }, // Breakfast: 8:00 AM - 10:00 AM
     { start: 20 * 60, end: 23 * 59},
+    { start: 15 * 60, end: 18 * 60},
   ],
   swag: [
   ],
