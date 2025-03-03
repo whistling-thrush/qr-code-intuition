@@ -24,7 +24,7 @@ export async function POST(req: Request) {
     console.log("Debug", decryptedBytes.toString(CryptoJS.enc.Utf8))
     const decryptedPayload = JSON.parse(decryptedBytes.toString(CryptoJS.enc.Utf8))
 
-    const { userId, purpose, timestamp } = decryptedPayload
+    const { purpose, timestamp } = decryptedPayload
 
     const now = new Date()
     const qrTimestamp = new Date(timestamp)
