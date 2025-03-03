@@ -3,8 +3,6 @@ import CryptoJS from "crypto-js"
 
 const SECRET_KEY = process.env.QR_SECRET_KEY || "default-secret-key"
 
-console.log(SECRET_KEY)
-
 const TIME_SLOTS = {
   food: [
     { start: 12 * 60, end: 14 * 60 }, // Lunch: 12:00 PM - 2:00 PM
@@ -19,9 +17,7 @@ const TIME_SLOTS = {
 export async function POST(req: Request) {
   try {
     const { qrCode } = await req.json()
-    console.log("QRCODE:", qrCode)
     const decryptedBytes = CryptoJS.AES.decrypt(qrCode, SECRET_KEY)
-    console.log("Debug", decryptedBytes.toString(CryptoJS.enc.Utf8))
     const decryptedPayload = JSON.parse(decryptedBytes.toString(CryptoJS.enc.Utf8))
 
     const { purpose, timestamp } = decryptedPayload
